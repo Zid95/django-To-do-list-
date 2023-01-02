@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+    <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/all.min.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/style.css' %} " />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      
+      <form method="POST">
+        {% csrf_token %}
+        {{form.todo}}
+        {{form.datetime}}
+        <div class="container d-flex justify-content-between">
+          <button type="submit" class="bg-primary btn mt-3 fs-5 fw-bold text-white" >Add Task</button>
+          <a href=" {% url 'clear_all' %} " class="bg-danger btn mt-3 fs-5 fw-bold text-white" >Clear All</a>
+        </div>
+      </form>
+    
+        </div>
+        <hr>
+       
+        {% for todo in todos %}
+        <div class="container task_content mt-3 ">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+          
+          {% if todo.check_todo == True %}
+          <h2 class="ms-3 complete ">{{todo}}</h2>
+          {% else %}
+          <h2 class="ms-3 ">{{todo}}</h2>
+          {% endif %}
+          {% if todo.datetime %}
+          <h3 class="mt-1" >{{todo.datetime}}</h3>
+          {% endif %}
+          <div>
+            <a href=" {% url 'update' todo.id %} " class=" btn btn-primary mt-1 ">Update</a>
+            <a href=" {% url 'delete' todo.id %} " class="btn btn-danger mt-1 me-2 " type="button">Delete</a>
+          </div>
+        </div>
+      </div>
+        {% endfor %}
+        
+      </div>
+    </div>
+
+
+
+
+  
+    <script src=" {% static 'js/bootstrap.bundle.min.js' %} "></script>
+    <script src=" {% static 'js/all.min.js' %} "></script>
+    <script src=" {% static 'js/main.js' %} " ></script>
+  </body>
+</html>

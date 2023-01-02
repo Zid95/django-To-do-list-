@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+    <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/all.min.css' %} " />
+    <link rel="stylesheet" href=" {% static 'css/style.css' %} " />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-white">Are you sure to delete this task ?</h1>
+      <form method="POST">
+        {% csrf_token %}
+        <hr />
+        <h1 class="text-white">{{todo}}</h1>
+        <a href=" {% url 'home' %} " class="btn btn-primary mt-3">Cancel</a>
+        <button type="submit" class="btn btn-danger mt-3 ms-2">Delete</button>
+      </form>
+    </div>
+
+    <script src=" {% static 'js/bootstrap.bundle.min.js' %} "></script>
+    <script src=" {% static 'js/all.min.js' %} "></script>
+    <script src=" {% static 'js/main.js' %} "></script>
+  </body>
+</html>
